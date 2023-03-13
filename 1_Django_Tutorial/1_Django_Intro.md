@@ -12,3 +12,6 @@ Django suit le **Design Pattern MVT** (Model View Template):
 - Le **Template** qui contient l'affichage de la page Web, dans un fichier `.html` mais avec des tags Django pour répondre à certains besoins logiques, habtiuellement dans un dossier appelé `templates`.  
 
 Les navigations par URL sont permises via un fichier `urls.py`.
+
+Mais je préfère quand même me baser sur la vraie doc de Django, même si ce sera plus long, vu que là je suis quand même censé expertiser sur un projet professionnel dessus. Je vais donc utiliser le tuto officiel, bien qu'il soit plus long : <https://docs.djangoproject.com/fr/4.1/intro/tutorial01/>
+(Celui de w3schools est vraiment trop léger dans ce contexte selon moi).  

@@ -34,6 +34,15 @@ sudo update-alternatives --install /usr/bin/pip pip /usr/local/bin/pip3.11 1
 pip -V # Affiche alors pip 23.0.1
 ```
 
+## Installation de Django
+
+```bash
+python -m pip install Django
+python -m django --version # Affiche 4.1.7
+(Si environnement virtuel déjà activé) django-admin --version # Affiche DJano 4.1.7 (Le cours est en 4.1.2 mais osef)
+(Facultatif) pip install --upgrade pip # Bizarrement, ma version de pip a un peu diminué dans l'environnement virtuel, mais bon c'est corrigé
+```
+
 ## Installation d'un environnement virtuel Python
 
 Pour chaque projet Django, on va configurer un **environnement virtuel** Python qui permettra d'avoir une configuration propre à chaque projet (un peu à la manière d'un composer.php pour chaque projet PHP en Symfony).  
@@ -45,10 +54,30 @@ python -m venv myworld # la création de l'environnement implique la création d
 source myworld/bin/activate # Cette commande devra être activée manuellement à chaque fois qu'on travaillera sur ce projet. Je pense que ça n'existe pas sur Django 1
 ```
 
-## Installation de Django
+
+## Création d'un projet Django
+
+Le projet de ce tuto va s'appeler `my_tennis_club`:  
 
 ```bash
-python -m pip install Django
-pip install --upgrade pip # Bizarrement, ma version de pip a un peu diminué dans l'environnement virtuel, mais bon c'est corrigé
-django-admin --version # Affiche DJano 4.1.7 (Le cours est en 4.1.2 mais osef)
+cd ~/Documents/Informatique/Django/myworld/
+django-admin startproject my_tennis_club
+cd my_tennis_club
+python manage.py runserver
+```
+
+On peut alors voir un projet de base être affiché dans le navigateur sur http://localhost:8000/.  
+Le message des 18 "unapplied migrations" est pour le moment normal.  
+
+## Création d'une App
+
+En Django projet et app sont deux notions différentes.  
+Une application est une appli web qui est une partie de mon projet.
+On va créer ici on application s'appelant `members`.
+
+Pour ce faire, on exécute les commandes suivantes :
+
+```bash
+cd ~/Documents/Informatique/Django/myworld/my_tennis_club
+python manage.py startapp members
 ```
