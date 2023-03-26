@@ -81,3 +81,9 @@ Pour ce faire, on exécute les commandes suivantes :
 cd ~/Documents/Informatique/Django/myworld/my_tennis_club
 python manage.py startapp members
 ```
+
+## Selon la doc officielle de Django
+
+Je crée un projet en faisant `django-admin startproject mysite`.  
+
+Je me retrouve alors avec un projet s'appelant `mysite`, dans leuqel je trouve également un projet appelé `mysite`.

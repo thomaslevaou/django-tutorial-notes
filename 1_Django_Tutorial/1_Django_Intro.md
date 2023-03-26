@@ -1,7 +1,7 @@
 # Introduction à Django
 
 Je vais noter ici ce que j'apprends en suivant la documentation officielle de Django, pour être à jour le plus rapidement possible avec les technologies du moment.
-<https://www.djangoproject.com/>.  
+<https://www.djangoproject.com/>, ou plus précisément ici : <https://docs.djangoproject.com/en/4.1/intro/>.  
 
 Enfin pour avoir quelque chose de plus stable en termes de tuto, je vais me baser sur le tuto de w3schools <https://www.w3schools.com/django/index.php> qui a l'air à jour en Django 4 aussi. L'avantage d'un tutorial comme celui-ci est le fait d'avoir accès à des exos pour s'entraîner.  
 
