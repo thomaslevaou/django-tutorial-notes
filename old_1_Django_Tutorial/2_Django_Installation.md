@@ -43,7 +43,37 @@ python -m django --version # Affiche 4.1.7
 (Facultatif) pip install --upgrade pip # Bizarrement, ma version de pip a un peu diminué dans l'environnement virtuel, mais bon c'est corrigé
 ```
 
-## Installation d'un environnement virtuel Python
+## Création d'un projet Django, selon la doc officielle
+
+Je crée un projet en faisant `django-admin startproject mysite`.  
+
+Je me retrouve alors avec un projet s'appelant `mysite`, dans leuqel je trouve également un projet appelé `mysite`.
+
+```bash
+django-admin startproject mysite
+cd mysite/
+python manage.py runserver
+```
+
+On peut alors voir le résultat être affiché à l'adresse <http://localhost:8000/>.  
+
+Je peux aussi changer le port si je le souhaite en paramètre du `runserver`, par exemple en faisant `python manage.py runserver 8080` pour que le projet soit accessible sur le port 8080.
+
+On vient donc de mettre en place un projet, qui va faire office _d'environnement_.
+
+En Django, on distingue les **apps** des **projets**. Un projet rassemble différentes applications Web, appelées ici apps.
+
+Toujours dans le dossier `mysite`, on va créer une application `polls` via la commande suivante :
+
+```bash
+python manage.py startapp polls
+```
+
+Parfois les apps sont créées dans le dossier `mysite` du projet, mais osef.
+
+À partir de maintenant, je vais essayer de reproduire le projet uniquement en suivant la doc officielle de Django.
+
+## Version non-officielle (W3Schools)
 
 Pour chaque projet Django, on va configurer un **environnement virtuel** Python qui permettra d'avoir une configuration propre à chaque projet (un peu à la manière d'un composer.php pour chaque projet PHP en Symfony).  
 On peut appeler chacun de nos environnements virtuels de la manière qu'on veut. Ici, je vais vouloir l'appeler `myworld`, ce qui va être possible via les commandes suivantes :
@@ -81,9 +111,3 @@ Pour ce faire, on exécute les commandes suivantes :
 cd ~/Documents/Informatique/Django/myworld/my_tennis_club
 python manage.py startapp members
 ```
-
-## Selon la doc officielle de Django
-
-Je crée un projet en faisant `django-admin startproject mysite`.  
-
-Je me retrouve alors avec un projet s'appelant `mysite`, dans leuqel je trouve également un projet appelé `mysite`.
