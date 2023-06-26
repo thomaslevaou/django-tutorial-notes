@@ -92,4 +92,18 @@ q.choice_set.all() # La question a bien été supprimée
 
 Pour éviter d'avoir à coder ce genre de chose soi-même, Django dispose de ses propres pages d'administration pour permettre la gestion de contenus sur le site.
 
+La création d'un super-utilisateur a lieu en suivant les commandes suivantes :
 
+```bash
+python manage.py createsuperuser
+```
+
+En suivant l'invite de commande qui en résulte, on renseigne le nom de cet utilisateur en `admin`, son adresse e-mail en `admin@example.com`, son mot de passe en `admin`. Vu le contexte, on se balek des warnings de sécurité signalés par la console.
+
+En relançant alors le serveur (`python manage.py runserver`), on peut alors accéder à la page `http://127.0.0.1:8000/admin/login/?next=/admin/` en saisissant les identifiants que nous venons de créer.
+
+Les contenus affichés à l'écran `groups` et `users`, sont fournis par le framework d'authentification de Django, appelé `django.contrib.auth`.
+
+Pour ajouter du contenu de notre application `polls` de notre projet `mysite`, on doit le préciser dans le fichier `polls/admin.py`, via la commande `admin.site.register(Question)`. Une nouvelle ligne de gestion de la bdd s'affiche alors automatiquement sur `http://127.0.0.1:8000/admin/`.
+
+On a alors l'équivalent d'un PHPmyAdmin en Django.
