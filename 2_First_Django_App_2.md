@@ -1,5 +1,7 @@
 # Writing your first Django app, part 2
 
+## Base de données et gestion des modèles
+
 En plus de l'application `polls` que nous venons de créer, la création d'un projet Django entraîne automatiquement l'installation des app de contrib (celles visibles dans le `INSTALLED_APPS` de `mysite/settings`), qu'on va bientôt avoir l'occasion d'utiliser.
 
 Pour utiliser ces apps, on va avoir besoin de créer et d'utiliser une base de données. Pour la création, on l'exécute via la commande `python manage.py migrate`. Cette commande va créer les tables nécessaires au bon fonctionnement des INSTALLED_APPS, en se basant sur les réglages de `DATABASES`.
@@ -44,14 +46,50 @@ Ainsi, dans ce shell Django, on peut faire `Question.objects.all()`, après avoi
 On peut même s'amuser à insérer une donnée dans `Question` avec la suite de commandes suivante :
 
 ```Python
+from polls.models import Choice, Question
 Question.objects.all()
 from django.utils import timezone
-q = Question(question_text="What's new?", pub_date=timezone.now())
 q.save()
 q.id # 1
 q.question_text # "What's new?"
 q.pub_date #datetime.datetime(2012, 2, 26, 13, 0, 0, 775217, tzinfo=datetime.timezone.utc)
+q = Question(question_text="What's new?", pub_date=timezone.now())
 q.question_text = "What's up?"
 q.save()
 Question.objects.all()
 ```
+
+Cependant, le truc c'est qu'en l'état, le résultat de la commande `Question.objects.all()` est un `<QuerySet [<Question: Question object (1)>]>`, ce qui n'est pas très lisible.
+Pour changer ce résultat, on peut ajouter des fonctions `__str__` aux modèles `Question` et `Choice`, pour y ajouter par exemple des textes de questions.
+Ce n'est pas important que pour a fenêtre de commande, mais aussi pour les pages d'administration de Django.
+
+On profite de ce moment pour ajouter la méthode `was_published_recently` à `Question`, qui vérifie si la question a été publiée il y a moins de 24 heures.
+
+On peut alors relancer la commande python, et on en profite pour informer de l'existence de nouvelles méthodes qui existent :
+
+```Python
+Question.objects.filter(id=1)
+Question.objects.filter(question_text__startswith="What")
+from django.utils import timezone
+current_year = timezone.now().year
+Question.objects.get(pub_date__year=current_year)
+Question.objects.get(pk=1) # "primary key = 1", ici dans ce contexte la même chose que id=1
+q = Question.objects.get(pk=1)
+q.was_published_recently() # True or Flase, depending on the day the command was executed
+q.choice_set.all() # À partir du moment où un `choice` est un attribut de Question, Django crée automatiquement un `choice_set` représentant la liste des choix de la question
+# On peut alors ajouter les choices d'une question
+q.choice_set.create(choice_text="Not much", votes=0)
+q.choice_set.create(choice_text="The sky", votes=0)
+c = q.choice_set.create(choice_text="Just hacking again", votes=0)
+c.question # On voit alors la question "What's up" associée au dernier choix
+q.choice_set.all() # Là, le set n'est bien plus vite, mais comprend les trois questions précédentes
+c = q.choice_set.filter(choice_text__startswith="Just hacking")
+c.delete()
+q.choice_set.all() # La question a bien été supprimée
+```
+
+## Les interfaces d'administration Django
+
+Pour éviter d'avoir à coder ce genre de chose soi-même, Django dispose de ses propres pages d'administration pour permettre la gestion de contenus sur le site.
+
+
