@@ -44,3 +44,6 @@ urlpatterns = [
     path("<int:question_id>/vote/", views.vote, name="vote"),
 ]
 ```
+
+Ce qui nous permet d'arriver à une page disant "You're looking at question 34" en allant sur `http://127.0.0.1:8000/polls/34/`.
+
